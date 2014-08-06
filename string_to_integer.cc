@@ -33,17 +33,17 @@ public:
 		for (; str[i] != '\0' && str[i] >= '0' && str[i] <= '9'; i++)
 		{
 			result = 10 * result + (str[i] - '0');
+
+			//test if it's overflow.
+			if (sign==1 && result>INT_MAX)
+				return INT_MAX;
+
+			if (sign==-1 && -result < INT_MIN)
+				return INT_MIN;
 		}
 
 		if (sign == -1)
-			result *= -1;
-
-		//test if it's overflow.
-		if (result > INT_MAX)
-			return INT_MAX;
-
-		if (result < INT_MIN)
-			return INT_MIN;
+				result *= -1;
 
 		return result;
 	}
@@ -57,17 +57,3 @@ int main()
 
 	return 0;
 }
-
-/* 后记:
- * 	这个程序其实还是有bug的：
- * 	如果输入的数超过了longlong的表示范围可能会出错。
- * 	
- * 	但是一方面程序accepted，
- * 	另一方面改掉这个bug太麻烦而且影响可读性，就不改了，只是在这里标记下。
- *
- *
- *
- *
- *
- * 
- * */
