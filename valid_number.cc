@@ -1,3 +1,7 @@
+/*	I write a blog for this problem.
+ *	http://blog.csdn.net/timberwolf_2012/article/details/38487239
+ *
+ * */
 #include <iostream> 
 #include <regex>
 
