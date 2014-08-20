@@ -27,7 +27,8 @@ public:
 
 	ListNode *f(vector<ListNode *> &lists, int p, int r)
 	{
-		if (p < r) {
+		if (p < r) 
+		{
 			int q = (p + r) / 2;
 			return merge(f(lists, p, q), f(lists, q+1, r));
 		}
@@ -41,25 +42,15 @@ public:
 		ListNode *res = new ListNode(0);
 		ListNode *p = res;
 
-		/*
-		cout << "raw a:";
-		for (p = a; p != NULL; p = p->next)
-			cout << p->val << " ";
-		cout << endl;
-
-		cout << "raw b:";
-		for (p = b; p != NULL; p = p->next)
-			cout << p->val << " ";
-		cout << endl;
-
-		p = res;
-		*/
-
-		while (a!=NULL && b!=NULL) {
-			if (a->val <= b->val) {
+		while (a!=NULL && b!=NULL) 
+		{
+			if (a->val <= b->val) 
+			{
 				p->next = a;
 				a = a->next;
-			} else {
+			} 
+			else 
+			{
 				p->next = b;
 				b = b->next;
 			}
@@ -71,13 +62,6 @@ public:
 		p = res;
 		res = res->next;
 		delete p;
-
-		/*
-		cout << "Result:";
-		for (p = res; p != NULL; p = p->next)
-			cout << p->val << " ";
-		cout << endl;
-		*/
 
 		return res;
 	}
