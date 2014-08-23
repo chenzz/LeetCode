@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <string>
+#include <algorithm>
 
 using namespace std;
 
@@ -59,12 +60,14 @@ public:
 		{
 			int ia = i >= 0 ? a[i]-'0' : 0;
 			int ib = j >= 0 ? b[j]-'0' : 0;
-			res.insert(res.begin(), (ia+ib+carry)%2+'0');
+			res.push_back((ia+ib+carry) % 2 + '0');
 			carry = (ia+ib+carry) / 2;
 		}
 
 		if (carry == 1)
-			res.insert(res.begin(), '1');
+			res.push_back('1');
+
+		reverse(res.begin(), res.end());
 
 		return res;
 	}	
