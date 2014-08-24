@@ -3,7 +3,7 @@
 
 using namespace std;
 
-//Solution 1:
+//Solution 1: 麻烦点，不推荐
 //和combinations那道很类似
 //subsets = c(n, 0) + c(n, 1) + …… c(n, n)
 class Solution
@@ -40,68 +40,40 @@ public:
 	vector<int> solution;
 };
 
-//Solution 2
-//这种方法跟Solution1类似，只不过换了个写法.
-//http://fisherlei.blogspot.com/2013/01/leetcode-subsets.html
+//Solution 2: 推荐
+//递归求解，递归的函数是从当前位置往后求幂集。
+//	http://blog.csdn.net/tuantuanls/article/details/8751495
 class Solution2
 {
 public:
-	vector<vector<int>> subsets(vector<int> S)
+	vector<vector<int>> subsets(vector<int> &S)
 	{
+		vector<int> solution;
+
 		sort(S.begin(), S.end());
-		res.push_back(solution);
-		generate(0, S);
+		generate(S, 0);
 
 		return res;
 	}
 
-	void generate(int step, vector<int> &S)
+	void generate(vector<int> &S, int index)
 	{
-		for (int i = step; i < S.size(); i++)
-		{
-			solution.push_back(S[i]);
+		if (index == S.size())
 			res.push_back(solution);
-			if (i < S.size() - 1)
-				generate(i+1, S);
+		else
+		{
+			generate(S, index+1);
+
+			solution.push_back(S[index]);
+			generate(S, index+1);
+
 			solution.pop_back();
 		}
 	}
 
+private:
 	vector<vector<int>> res;
 	vector<int> solution;
-};
-
-//Solution 3
-//暂时没看懂。。
-//http://blog.csdn.net/tuantuanls/article/details/8751495
-class Solution3 
-{
-	vector<vector<int> > result;
-public:
-	void sub(vector<int> &S, vector<int> tmp, int level)
-	{
-		if(level == S.size())
-		{
-			result.push_back(tmp);
-			return;
-		}
-
-		sub(S, tmp, level + 1);
-		tmp.push_back(S[level]);
-		sub(S, tmp, level + 1);
-
-	}
-
-	vector<vector<int> > subsets(vector<int> &S) 
-	{
-		vector<int> tmp;
-
-		sort(S.begin(), S.end());
-		sub(S, tmp, 0);
-
-		return result;
-	}
-
 };
 
 int main()
