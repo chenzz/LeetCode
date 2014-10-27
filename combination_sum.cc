@@ -15,11 +15,11 @@ public:
 		sort(this->candidates.begin(), this->candidates.end());
 		vector<int> solution;
 
-		DFS(solution, 0, target);
+		DFS(solution, target, 0);
 
 		return res;
 	}
-	void DFS(vector<int> &solution, int start, int target)
+	void DFS(vector<int> &solution, int target, int start)
 	{
 		if (target == 0)
 			res.push_back(solution);
@@ -28,7 +28,7 @@ public:
 			for (int i = start; i < candidates.size() && candidates[i] <= target; i++)
 			{
 				solution.push_back(candidates[i]);
-				DFS(solution, i, target-candidates[i]);
+				DFS(solution, target-candidates[i], i);
 				solution.pop_back();
 			}
 		}
@@ -42,10 +42,10 @@ int main()
 {
 	Solution s;
 	vector<int> candidates = {2, 3, 6, 7};
-	for (auto &x : s.combinationSum(candidates, 7))
+	for (auto &i : s.combinationSum(candidates, 7))
 	{
-		for (auto &y : x)
-			cout << y << " ";
+		for (auto &j : i)
+			cout << j << " ";
 		cout << endl;
 	}
 
